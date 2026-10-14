@@ -32,12 +32,12 @@ vercel --prod
 ## 3. Primeiro acesso da Ana
 
 1. Ela abre o endereço do Vercel no celular.
-2. Cola o URL do Apps Script e digita a chave. O app guarda isso no celular dela.
+2. Digita a chave. O app guarda isso no celular dela.
 3. Para virar um ícone na tela inicial:
    - iPhone (Safari): **Compartilhar > Adicionar à Tela de Início**.
    - Android (Chrome): menu **⋮ > Adicionar à tela inicial**.
 
-Dica: para ela não precisar colar o URL, abra `public/index.html`, procure `const DEFAULT_API_URL=""` e cole o endereço entre as aspas antes de subir. A chave continua sendo pedida, para que só quem sabe a chave consiga ler e gravar.
+O endereço do Apps Script já está gravado no app (`DEFAULT_API_URL` em `public/index.html`). A Ana só digita a chave.
 
 ## Como funciona
 
