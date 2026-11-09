@@ -59,6 +59,50 @@
   --shadow-lg:0 2px 6px rgba(0,0,0,.4),0 24px 60px -20px rgba(0,0,0,.8);
   color-scheme:dark}
 
+/* ---------- Modo rosa: mesma hierarquia do funil, em tons pastel ----------
+   Lavanda = Ativados · Pêssego = Convertidos · Rosa-chiclete = Gerado */
+html:root[data-pink="1"]{
+  --bg:#FFF1F5; --bg-glow:#FFE3EC; --surface:#FFFAFC; --surface-2:#FFEFF4; --surface-3:#FDE3EB;
+  --ink:#4A1F35; --ink-2:#6E3C55; --muted:#A06F87; --line:#F6D3E0;
+  --a:#B48BE8; --a-soft:#F3E9FF; --a-ink:#6E45A8;
+  --c:#F6A58A; --c-soft:#FFEDE5; --c-ink:#A4523A;
+  --g:#EE6A9B; --g-soft:#FFE1EC; --g-ink:#B02D61;
+  --ok:#3FB58A; --ok-soft:#DFF6EC; --warn:#C27A2C; --warn-soft:#FFF0DF; --bad:#DB4F6F; --bad-soft:#FFE2E8;
+  --btn:#E65C92; --btn-ink:#FFFFFF; --on-color:#FFFFFF;
+  --shadow:0 1px 2px rgba(176,45,97,.06),0 12px 32px -14px rgba(176,45,97,.28);
+  --shadow-lg:0 2px 6px rgba(176,45,97,.08),0 24px 60px -20px rgba(176,45,97,.4);
+  color-scheme:light}
+html:root[data-pink="1"] body::before{background:radial-gradient(40% 50% at 12% 25%,rgba(180,139,232,.28),transparent 70%),radial-gradient(35% 45% at 55% 8%,rgba(246,165,138,.26),transparent 70%),radial-gradient(45% 55% at 92% 30%,rgba(238,106,155,.3),transparent 70%)}
+html:root[data-pink="1"] .hero{background:linear-gradient(140deg,#F77FAA,#E25C93 55%,#C66BD8);color:#fff}
+html:root[data-pink="1"] .hero::before{background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%)}
+html:root[data-pink="1"] .ring .tr{stroke:rgba(255,255,255,.28)} html:root[data-pink="1"] .ring .pr{stroke:#fff} html:root[data-pink="1"] .ring text{fill:#fff}
+html:root[data-pink="1"] .tabs .ind{background:linear-gradient(135deg,#F48AB0,#E25C93)}
+html:root[data-pink="1"] .tabs button.on{color:#fff}
+html:root[data-pink="1"] .wd.sel{background:linear-gradient(160deg,#F48AB0,#E25C93);color:#fff}
+html:root[data-pink="1"] .wd.sel small,html:root[data-pink="1"] .wd.sel b{color:#fff}
+html:root[data-pink="1"] .chip.on,html:root[data-pink="1"] .opts button.on:not(.k-ativado):not(.k-conducao):not(.k-agendado):not(.k-perdido):not(.k-nfit){background:var(--g);border-color:var(--g);color:#fff}
+html:root[data-pink="1"] .chip.on em{color:#fff}
+html:root[data-pink="1"] .toast{background:#E25C93;color:#fff}
+html:root[data-pink="1"] .cal button.today{outline-color:var(--g)}
+
+/* ---------- Interruptor do modo rosa ---------- */
+.topright{display:flex;align-items:center;gap:8px;flex:none}
+.pinksw{position:relative;width:58px;height:32px;border-radius:99px;border:1px solid var(--line);background:var(--surface-3);padding:0;flex:none;transition:background .35s,border-color .35s}
+.pinksw .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18);display:grid;place-items:center;transition:transform .45s var(--spring),background .35s}
+.pinksw .knob svg{width:15px;height:15px;transition:transform .5s var(--spring)}
+.pinksw .knob svg path{fill:#F2A7C3;transition:fill .35s}
+.pinksw[aria-checked="true"]{background:linear-gradient(135deg,#F9A8C6,#E65C92);border-color:transparent}
+.pinksw[aria-checked="true"] .knob{transform:translateX(26px)}
+.pinksw[aria-checked="true"] .knob svg{transform:scale(1.15)}
+.pinksw[aria-checked="true"] .knob{animation:beat .6s .2s var(--spring)}
+@keyframes beat{0%,100%{scale:1}40%{scale:1.18}}
+.pinksw[aria-checked="true"] .knob svg path{fill:#E65C92}
+@media (max-width:440px){.sync span{display:none}.sync{padding:10px}}
+.hearts{position:fixed;inset:0;pointer-events:none;z-index:69;overflow:hidden}
+.hearts i{position:absolute;bottom:-30px;font-style:normal;animation:floatUp 1.8s var(--ease) forwards;opacity:0}
+@keyframes floatUp{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(-75vh) scale(1.1) rotate(var(--r));opacity:0}}
+html.pink-fade *{transition:background-color .45s,color .45s,border-color .45s,fill .45s,stroke .45s!important}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 html,body{min-height:100%}
@@ -408,7 +452,7 @@ details[open].guide summary::after{transform:rotate(-135deg)}
 <div class="app" id="app">
   <header class="top">
     <div class="hello"><small id="helloDate">—</small><h1 id="screenTitle">Olá, Ana</h1></div>
-    <div class="sync st" id="stSheet"><i></i><span>Planilha</span></div>
+    <div class="topright"><div class="sync st" id="stSheet"><i></i><span>Planilha</span></div><button type="button" class="pinksw" id="pinkSw" role="switch" aria-checked="false" aria-label="Modo rosa" title="Modo rosa"><span class="knob"><svg viewBox="0 0 24 24"><path d="M12 20.3s-7.6-4.6-7.6-10.2A4.3 4.3 0 0 1 12 7.4a4.3 4.3 0 0 1 7.6 2.7c0 5.6-7.6 10.2-7.6 10.2z"/></svg></span></button></div>
   </header>
   <div class="notice" id="notice" role="status" hidden><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.5"/><circle cx="12" cy="12" r="9"/></svg><span id="noticeText"></span></div>
 
@@ -1037,6 +1081,26 @@ $("refreshBtn").onclick=()=>load(true);
 $("changeCfg").onclick=()=>showSetup("");
 window.addEventListener("online",()=>processQueue());
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")load(false)});
+
+/* ---------- Modo rosa ---------- */
+function applyPink(on,anim){
+  const root=document.documentElement;
+  if(anim){root.classList.add("pink-fade");setTimeout(()=>root.classList.remove("pink-fade"),600)}
+  if(on)root.setAttribute("data-pink","1");else root.removeAttribute("data-pink");
+  $("pinkSw").setAttribute("aria-checked",on?"true":"false");
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m=>{if(!m.dataset.orig)m.dataset.orig=m.content;m.content=on?"#FFF1F5":m.dataset.orig});
+  try{localStorage.setItem("ss-pink",on?"1":"0")}catch(_){}
+}
+function hearts(){
+  if(reduceMotion)return;
+  const box=document.createElement("div");box.className="hearts";
+  for(let i=0;i<16;i++){const h=document.createElement("i");h.textContent=["\u2665","\u2740","\u2665"][i%3];
+    h.style.left=(5+Math.random()*90)+"%";h.style.fontSize=(14+Math.random()*18)+"px";h.style.color=["#F48AB0","#B48BE8","#F6A58A","#E65C92"][i%4];
+    h.style.setProperty("--r",(Math.random()*60-30)+"deg");h.style.animationDelay=(Math.random()*.5)+"s";box.appendChild(h)}
+  document.body.appendChild(box);setTimeout(()=>box.remove(),2600);
+}
+$("pinkSw").addEventListener("click",()=>{const on=!document.documentElement.hasAttribute("data-pink");applyPink(on,true);buzz(12);if(on){hearts();toast("Modo rosa ativado")}else toast("Modo rosa desativado");render()});
+try{if(localStorage.getItem("ss-pink")==="1")applyPink(true,false)}catch(_){}
 
 /* ---------- Início ---------- */
 const cache=ls.get("ss-cache",null);
